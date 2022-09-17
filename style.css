@@ -1,0 +1,188 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  color: #495057;
+  line-height: 1;
+  font-size: 18px;
+}
+
+section {
+  margin: 100px auto 50px;
+  width: 520px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.summary {
+  width: 100%;
+  display: grid;
+  grid-template-rows: 50px 50px;
+  grid-template-columns: 2fr 1fr 1fr;
+  align-items: center;
+
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.current-price {
+  grid-column: 1;
+  grid-row: 1/-1;
+}
+
+.last-price {
+  font-size: 48px;
+  font-weight: bold;
+  padding: 0 20px;
+}
+
+.change-percent {
+  padding: 0 20px;
+  /* align-self: start; */
+}
+
+.summary span {
+  color: #212529;
+  /* font-size: 18px; */
+}
+
+.total {
+  width: 580px;
+  height: 40px;
+  margin: 15px 0;
+  font-size: 16px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  background-color: #f8f9fa;
+}
+
+.total .order {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  width: 24px;
+}
+
+.sell-icon {
+  stroke: #f03e3e;
+}
+
+.buy-icon {
+  stroke: #37b24d;
+}
+
+.total .buy-order,
+.total .sell-order {
+  /* width: 300px; */
+  padding: 0 5px;
+  font-weight: bold;
+}
+
+.buy-order {
+  color: #37b24d;
+}
+
+.sell-order {
+  color: #f03e3e;
+}
+
+.menu,
+.table-head {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+ul.table-head {
+  list-style-type: none;
+  font-size: 16px;
+  background-color: #dee2e6;
+  padding: 1px 5px;
+}
+
+.menu h3 {
+  font-size: 16px;
+  justify-self: flex-start;
+}
+
+.table-head .th-amount {
+  width: 20%;
+  padding: 5px 12px;
+}
+
+.table-head .th-price {
+  width: 40%;
+  text-align: center;
+}
+
+.input select {
+  padding: 5px 20px 5px 7px;
+  appearance: none;
+  border: 1px solid #dedede;
+  font-size: 16px;
+  background: transparent;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%20000002%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-position: right 7px top 50%, 0, 0;
+  background-size: 10px auto, 100%;
+  background-repeat: no-repeat;
+}
+
+.order-list {
+  width: 100%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  font-weight: normal;
+  padding: 5px;
+  font-size: 14px;
+}
+
+td {
+  width: 22%;
+  padding: 5px 12px;
+}
+
+tr:nth-child(odd) {
+  background-color: #f8f9fa;
+}
+
+tr:nth-child(even) {
+  background-color: #e9ecef;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+.center {
+  text-align: center;
+}
+
+.pad {
+  border-right: 1px solid #dee2e6;
+}

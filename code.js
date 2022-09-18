@@ -38,16 +38,16 @@ const summaryMarket = async () => {
     ticker.price_change_percent
   }</div>
     </div>
-    <div class="high-price">Giá cao 24h<br><span>${separateThousand(
+    <div class="high-price">Cao 24h<br><span>${separateThousand(
       ticker.high
     )}</span></div>
-    <div class="asa-amount">KL 24h (ASA)<br><span>${separateThousand(
+    <div class="asa-amount">KL 24h(ASA)<br><span>${separateThousand(
       ticker.amount
     )}</span></div>
-    <div class="low-price">Giá thấp 24h<br><span>${separateThousand(
+    <div class="low-price">Thấp 24h<br><span>${separateThousand(
       ticker.low
     )}</span></div>
-    <div class="xu-volume">KL 24h (XU)<br><span>${separateThousand(
+    <div class="xu-volume">KL 24h(XU)<br><span>${separateThousand(
       ticker.volume
     )}</span></div>
   `;
@@ -96,12 +96,12 @@ const orderBook = async (amount = 20) => {
   }
 
   buy.innerHTML = `
-    <div class="total-asa">${separateThousand(sumBuyAsa)} ASA</div>
-    <div class="total-xu">~ ${separateThousand(sumBuyXu)} XU</div>
+    <div class="total-asa">${separateThousand(sumBuyAsa)}A</div>
+    <div class="total-xu">${separateThousand(sumBuyXu)}đ</div>
   `;
   sell.innerHTML = `
-  <div class="total-asa">${separateThousand(sumSellAsa)} ASA</div>
-  <div class="total-xu">~ ${separateThousand(sumSellXu)} XU</div>
+  <div class="total-asa">${separateThousand(sumSellAsa)}A</div>
+  <div class="total-xu">${separateThousand(sumSellXu)}đ</div>
 `;
   orderList.innerHTML = "";
   orderList.append(table);

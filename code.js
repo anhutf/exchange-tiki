@@ -9,21 +9,47 @@ const fetchData = async function (url) {
   return res.data;
 };
 
+// Separate thousand
+const separateThousand = (value) => {
+  return value
+    .toString()
+    .replace(/(\.\d{2})\d*/, "$1")
+    .replace(/(\d)(?=(\d{3})+\b)/g, "$1,");
+};
+
 // Display summary
 const summaryMarket = async () => {
   const data = await fetchData(
     "https://api.tiki.vn/sandseel/api/v2/public/markets/astra/summary"
   );
   const ticker = data.ticker;
+
+  // Set color of change percent
+  const percent = parseFloat(ticker.price_change_percent);
+  let classColor = "buy-order";
+  if (percent < 0) {
+    classColor = "sell-order";
+  }
+
   summary.innerHTML = `
     <div class="current-price">
-        <div class="last-price">${ticker.last}</div>
-        <div class="change-percent">${ticker.price_change_percent}</div>
+        <div class="last-price">${separateThousand(ticker.last)}</div>
+        <div class="change-percent ${classColor}">${
+    ticker.price_change_percent
+  }</div>
     </div>
-    <div class="high-price">24h High<br><span>${ticker.high}</span></div>
-    <div class="asa-amount">24h Vol (ASA)<br><span>${ticker.amount}</span></div>
-    <div class="low-price">24h Low<br><span>${ticker.low}</span></div>
-    <div class="xu-volume">24h Vol (XU)<br><span>${ticker.volume}</span></div>
+    <div class="high-price">Giá cao 24h<br><span>${separateThousand(
+      ticker.high
+    )}</span></div>
+    <div class="asa-amount">KL 24h (ASA)<br><span>${separateThousand(
+      ticker.amount
+    )}</span></div>
+    <div class="low-price">Giá thấp 24h<br><span>${separateThousand(
+      ticker.low
+    )}</span></div>
+    <div class="xu-volume">KL 24h (XU)<br><span>${separateThousand(
+      ticker.volume
+    )}</span></div>
   `;
 };
 
@@ -60,19 +86,23 @@ const orderBook = async (amount = 20) => {
     const tr = document.createElement("tr");
     if (i < amount) {
       tr.innerHTML = `
-        <th class="left">${i + 1}</th>
-        <td class="left">${buyOrder[i][1]}</td>
-        <td class="buy-order right pad">${buyOrder[i][0]}</td>
-        <td class="sell-order left">${sellOrder[i][0]}</td>
-        <td class="right">${sellOrder[i][1]}</td>
-        <th class="right">${i + 1}</th>
+        <td class="left">${separateThousand(buyOrder[i][1])}</td>
+        <td class="buy-order right pad">${separateThousand(buyOrder[i][0])}</td>
+        <td class="sell-order left">${separateThousand(sellOrder[i][0])}</td>
+        <td class="right">${separateThousand(sellOrder[i][1])}</td>
       `;
       table.appendChild(tr);
     }
   }
 
-  buy.innerText = `${sumBuyAsa} ASA ~ ${sumBuyXu} XU`;
-  sell.innerText = `${sumSellAsa} ASA ~ ${sumSellXu} XU`;
+  buy.innerHTML = `
+    <div class="total-asa">${separateThousand(sumBuyAsa)} ASA</div>
+    <div class="total-xu">~ ${separateThousand(sumBuyXu)} XU</div>
+  `;
+  sell.innerHTML = `
+  <div class="total-asa">${separateThousand(sumSellAsa)} ASA</div>
+  <div class="total-xu">~ ${separateThousand(sumSellXu)} XU</div>
+`;
   orderList.innerHTML = "";
   orderList.append(table);
 };

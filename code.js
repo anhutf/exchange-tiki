@@ -1,5 +1,6 @@
 const summary = document.querySelector(".summary");
-const orderList = document.querySelector(".order-list");
+const buyList = document.querySelector(".buy-list");
+const sellList = document.querySelector(".sell-list");
 const buy = document.querySelector(".buy-order");
 const sell = document.querySelector(".sell-order");
 
@@ -53,61 +54,75 @@ const summaryMarket = async () => {
   `;
 };
 
-// Display order book
-const orderBook = async (amount = 20) => {
+// Sum asa, xu
+const sumValue = (sum, currentVal) => {
+  sum[0] += parseFloat(currentVal[1]);
+  sum[1] += parseFloat(currentVal[1]) * currentVal[0];
+  return sum;
+};
+
+// Merge orderbook
+let value;
+const mergeOrderBook = (merge, currentVal) => {
+  if (currentVal[0] % 2 === 0) {
+    merge[0] += parseFloat(currentVal[1]);
+    merge.push([merge[0], currentVal[0]]);
+    merge[0] = 0;
+  } else {
+    merge[0] += parseFloat(currentVal[1]);
+  }
+  return merge;
+};
+
+// Display total asa, xu, order book
+const orderBook = async (amount = 20, num = 1) => {
   const order = await fetchData(
     "https://api.tiki.vn/sandseel/api/v2/public/markets/asaxu/depth"
   );
   const buyOrder = order.bids;
   const sellOrder = order.asks;
-  const orderLength =
-    buyOrder.length >= sellOrder.length ? buyOrder.length : sellOrder.length;
-  let sumSellAsa = 0;
-  let sumSellXu = 0;
-  let sumBuyAsa = 0;
-  let sumBuyXu = 0;
 
-  const table = document.createElement("table");
-  for (let i = 0; i < orderLength; i++) {
-    if (!buyOrder[i]) {
-      sumBuyAsa = sumBuyAsa;
-    } else {
-      sumBuyAsa += parseFloat(buyOrder[i][1]);
-      sumBuyXu += parseFloat(buyOrder[i][1]) * buyOrder[i][0];
-    }
-
-    if (!sellOrder[i]) {
-      sumSellAsa = sumSellAsa;
-    } else {
-      sumSellAsa += parseFloat(sellOrder[i][1]);
-      sumSellXu += parseFloat(sellOrder[i][1]) * sellOrder[i][0];
-    }
-
-    const tr = document.createElement("tr");
-    if (i < amount) {
-      tr.innerHTML = `
-        <td class="left">${separateThousand(buyOrder[i][1])}</td>
-        <td class="buy-order right pad">${separateThousand(buyOrder[i][0])}</td>
-        <td class="sell-order left">${separateThousand(sellOrder[i][0])}</td>
-        <td class="right">${separateThousand(sellOrder[i][1])}</td>
-      `;
-      table.appendChild(tr);
-    }
-  }
+  // Sum asa, xu
+  const sumBuy = buyOrder.reduce(sumValue, [0, 0]);
+  const sumSell = sellOrder.reduce(sumValue, [0, 0]);
 
   buy.innerHTML = `
-    <div class="total-asa">${separateThousand(sumBuyAsa)}A</div>
-    <div class="total-xu">${separateThousand(sumBuyXu)}đ</div>
+    <div class="total-asa">${separateThousand(sumBuy[0])}A</div>
+    <div class="total-xu">${separateThousand(sumBuy[1])}đ</div>
   `;
   sell.innerHTML = `
-  <div class="total-asa">${separateThousand(sumSellAsa)}A</div>
-  <div class="total-xu">${separateThousand(sumSellXu)}đ</div>
+  <div class="total-asa">${separateThousand(sumSell[0])}A</div>
+  <div class="total-xu">${separateThousand(sumSell[1])}đ</div>
 `;
-  orderList.innerHTML = "";
-  orderList.append(table);
+
+  // Merge orderbook
+  const mergeBuy = buyOrder.reduce(mergeOrderBook, [0]);
+  const mergeSell = sellOrder.reduce(mergeOrderBook, [0]);
+  console.log(mergeBuy, mergeSell);
+
+  buyList.innerHTML = "";
+  sellList.innerHTML = "";
+  for (let i = 0; i < amount; i++) {
+    const divBuy = document.createElement("div");
+    const divSell = document.createElement("div");
+
+    if (num > 1) {
+    } else {
+      divBuy.innerHTML = `
+        <div class="buy-order">${separateThousand(buyOrder[i][1])}</div>
+        <div class="buy-order">${separateThousand(buyOrder[i][0])}</div>`;
+      divSell.innerHTML = `
+        <div class="sell-order">${separateThousand(sellOrder[i][0])}</div>
+        <div class="sell-order">${separateThousand(sellOrder[i][1])}</div>
+      `;
+      buyList.appendChild(divBuy);
+      sellList.appendChild(divSell);
+    }
+  }
 };
 
 let amount;
+let sum;
 // Run first time
 summaryMarket();
 orderBook();
@@ -115,12 +130,21 @@ orderBook();
 // Reload every 3 seconds
 setInterval(() => {
   summaryMarket();
-  orderBook(amount);
+  orderBook(amount, sum);
 }, 3000);
 
 // Get amount from user
+const sumList = document.querySelector("#sum-list");
+sumList.addEventListener("input", ({ target }) => {
+  sum = target.value;
+  numberList.value = 20;
+  orderBook(amount, sum);
+});
+
 const numberList = document.querySelector("#number-list");
 numberList.addEventListener("input", ({ target }) => {
   amount = target.value;
-  orderBook(amount);
+  // sum = 1;
+  sumList.value = 1;
+  orderBook(amount, sum);
 });

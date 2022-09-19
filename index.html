@@ -48,23 +48,33 @@
           <div class="sell-order"></div>
         </div>
       </div>
-      <div class="menu">
+      <div class="menu-select">
         <h3>SỔ LỆNH</h3>
         <div class="input">
+          <label for="sum-list">Gộp lệnh</label>
+          <select id="sum-list" name="sum-list">
+            <option value="1" selected>1</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+          </select>
+          <label for="number-list">Mở rộng</label>
           <select id="number-list" name="number-list">
-            <option value="20">20</option>
+            <option value="20" selected>20</option>
             <option value="50">50</option>
             <option value="100">100</option>
           </select>
         </div>
       </div>
-      <ul class="table-head">
-        <li class="th-amount left">Mua vào</li>
-        <li class="th-price">Giá (Xu)</li>
-        <li class="th-amount right">Bán ra</li>
-      </ul>
+      <div class="menu">
+        <div class="menu-list">Mua vào</div>
+        <div class="menu-list">Giá (Xu)</div>
+        <div class="menu-list">Bán ra</div>
+      </div>
 
-      <div class="order-list"></div>
+      <div class="order-list">
+        <div class="buy-list"></div>
+        <div class="sell-list"></div>
+      </div>
     </section>
     <script src="code.js"></script>
   </body>

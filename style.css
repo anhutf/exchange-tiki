@@ -16,7 +16,7 @@ body {
 
 h1 {
   font-size: 20px;
-  margin-bottom: 10px;
+  margin: 5px 0 10px;
 }
 
 section {
@@ -42,7 +42,7 @@ section {
   width: 100%;
   display: grid;
   grid-template-rows: 50px 50px;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 50% auto auto;
   gap: 5px;
   align-items: center;
   line-height: 1.2;
@@ -122,8 +122,8 @@ section {
   color: #f03e3e;
 }
 
-.menu,
-.table-head {
+.menu-select,
+.menu {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -131,30 +131,23 @@ section {
   margin-bottom: 5px;
 }
 
-ul.table-head {
-  list-style-type: none;
-  background-color: #dee2e6;
-  padding: 1px 0;
-  font-weight: bold;
+.menu-select {
+  padding-bottom: 2px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #dee2e6;
 }
 
-.menu h3 {
+.menu-select h3 {
   font-size: 14px;
   justify-self: flex-start;
 }
 
-.table-head .th-amount {
-  width: 30%;
-  padding: 5px 12px;
-}
-
-.table-head .th-price {
-  width: 40%;
-  text-align: center;
+.menu-list {
+  font-weight: bold;
 }
 
 .input select {
-  padding: 3px 15px 3px 5px;
+  padding: 3px 17px 3px 5px;
   appearance: none;
   border: 1px solid #dedede;
   font-size: 14px;
@@ -167,24 +160,25 @@ ul.table-head {
 
 .order-list {
   width: 100%;
+  display: flex;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
+.buy-list {
+  width: 50%;
+  padding-right: 5px;
+  border-right: 1px solid #dee2e6;
 }
 
-td {
-  width: 22%;
-  padding: 5px 12px;
+.sell-list {
+  width: 50%;
+  padding-left: 5px;
 }
 
-tr:nth-child(odd) {
-  background-color: #f8f9fa;
-}
-
-tr:nth-child(even) {
-  background-color: #e9ecef;
+.buy-list div,
+.sell-list div {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 0;
 }
 
 .left {
@@ -197,8 +191,4 @@ tr:nth-child(even) {
 
 .center {
   text-align: center;
-}
-
-.pad {
-  border-right: 1px solid #dee2e6;
 }

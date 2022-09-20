@@ -5,11 +5,12 @@
 }
 
 body {
-  font-family: "Inter", sans-serif;
-  color: #495057;
+  font-family: 'Roboto', sans-serif;
+  background-color: #212529;
+  color: #f8f9fa;
   line-height: 1;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   display: flex;
   justify-content: center;
 }
@@ -20,9 +21,8 @@ h1 {
 }
 
 section {
-  margin: 20px 10px 10px;
+  margin: 20px 0 10px;
   width: 400px;
-  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,13 +33,17 @@ section {
 
 @media only screen and (max-width: 500px) {
   section {
-    width: 90%;
+    width: 100%;
     min-width: 300px;
   }
 }
 
 .summary {
+  background-color: #343a40;
+  font-size: 12px;
+  font-weight: 300;
   width: 100%;
+  padding: 10px;
   display: grid;
   grid-template-rows: 50px 50px;
   grid-template-columns: 50% auto auto;
@@ -55,7 +59,7 @@ section {
 
 .last-price {
   font-size: 36px;
-  font-weight: bold;
+  font-weight: 500;
   padding: 0 20px;
 }
 
@@ -64,20 +68,18 @@ section {
 }
 
 .summary span {
-  /* color: #212529; */
-  font-weight: bold;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .total {
-  width: 110%;
-  margin: 20px 0;
+  background-color: #343a40;
+  width: 100%;
+  margin: 5px 0;
+  padding: 20px 10px;
   display: flex;
   gap: 10px;
   justify-content: center;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  background-color: #f8f9fa;
-  padding: 20px 10px;
 }
 
 .total .order {
@@ -89,10 +91,11 @@ section {
 
 .total-asa {
   font-size: 16px;
+  margin-bottom: 2px;
 }
 
 .total-xu {
-  color: #495057;
+  color: #f8f9fa;
 }
 
 .icon {
@@ -109,9 +112,8 @@ section {
 
 .total .buy-order,
 .total .sell-order {
-  /* width: 300px; */
   padding-left: 5px;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .buy-order {
@@ -124,44 +126,42 @@ section {
 
 .menu-select,
 .menu {
+  background-color: #343a40;
   width: 100%;
+  padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 5px;
 }
 
 .menu-select {
   padding-bottom: 2px;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #dee2e6;
 }
 
 .menu-select h3 {
+  font-weight: 500;
   font-size: 14px;
   justify-self: flex-start;
 }
 
 .menu-list {
   width: 30%;
-  font-weight: bold;
+  font-weight: 300;
 }
 
 .input select {
-  width: 50px;
-  padding: 3px 17px 3px 5px;
-  appearance: none;
-  border: 1px solid #dedede;
-  font-size: 14px;
   background: transparent;
-  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%20000002%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
-  background-position: right 7px top 50%, 0, 0;
-  background-size: 10px auto, 100%;
-  background-repeat: no-repeat;
+  color: #dee2e6;
+  text-align: center;
+  border: none;
+  outline: none;
+  font-size: 16px;
 }
 
 .order-list {
+  background-color: #343a40;
   width: 100%;
+  padding: 0 10px;
   min-height: 440px;
   display: flex;
 }

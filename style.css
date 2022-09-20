@@ -1,3 +1,9 @@
+:root {
+  --theme-color: #212529;
+	--buy-color: #37b24d;
+  --sell-color: #f03e3e;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +12,7 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: #212529;
+  background-color: #1a1a1a;
   color: #f8f9fa;
   line-height: 1;
   font-size: 14px;
@@ -16,6 +22,7 @@ body {
 }
 
 h1 {
+  font-weight: 500;
   font-size: 20px;
   margin: 5px 0 10px;
 }
@@ -27,8 +34,6 @@ section {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 5px;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
 @media only screen and (max-width: 500px) {
@@ -39,7 +44,7 @@ section {
 }
 
 .summary {
-  background-color: #343a40;
+  background-color: var(--theme-color);
   font-size: 12px;
   font-weight: 300;
   width: 100%;
@@ -73,7 +78,7 @@ section {
 }
 
 .total {
-  background-color: #343a40;
+  background-color: var(--theme-color);
   width: 100%;
   margin: 5px 0;
   padding: 20px 10px;
@@ -90,7 +95,7 @@ section {
 }
 
 .total-asa {
-  font-size: 16px;
+  font-size: 18px;
   margin-bottom: 2px;
 }
 
@@ -99,15 +104,15 @@ section {
 }
 
 .icon {
-  width: 28px;
+  width: 32px;
 }
 
 .sell-icon {
-  stroke: #f03e3e;
+  stroke: var(--sell-color);
 }
 
 .buy-icon {
-  stroke: #37b24d;
+  stroke: var(--buy-color);
 }
 
 .total .buy-order,
@@ -117,16 +122,16 @@ section {
 }
 
 .buy-order {
-  color: #37b24d;
+  color: var(--buy-color);
 }
 
 .sell-order {
-  color: #f03e3e;
+  color: var(--sell-color);
 }
 
 .menu-select,
 .menu {
-  background-color: #343a40;
+  background-color: var(--theme-color);
   width: 100%;
   padding: 10px;
   display: flex;
@@ -149,6 +154,10 @@ section {
   font-weight: 300;
 }
 
+#sum-list {
+  margin-right: 10px;
+}
+
 .input select {
   background: transparent;
   color: #dee2e6;
@@ -159,9 +168,9 @@ section {
 }
 
 .order-list {
-  background-color: #343a40;
+  background-color: var(--theme-color);
   width: 100%;
-  padding: 0 10px;
+  padding: 0 10px 10px;
   min-height: 440px;
   display: flex;
 }

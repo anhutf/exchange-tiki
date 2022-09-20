@@ -62,17 +62,24 @@ const sumValue = (sum, currentVal) => {
 };
 
 // Merge orderbook
-let value;
-const mergeOrderBook = (merge, currentVal) => {
-  if (currentVal[0] % 2 === 0) {
-    merge[0] += parseFloat(currentVal[1]);
-    merge.push([merge[0], currentVal[0]]);
-    merge[0] = 0;
-  } else {
-    merge[0] += parseFloat(currentVal[1]);
-  }
-  return merge;
-};
+const mergeOrderBook = (arr, num)=> {
+  let value = 0;
+  let price = arr[0][0] - (arr[0][0] % num);
+  // let price = num <= 0 ? arr[0][0] - (arr[0][0] % num) : arr[0][0] - (arr[0][0] % num) + num;
+  
+  return arr.reduce((merge, currentVal) => {
+    if ((currentVal[0] - price)*num > 0) {
+      merge.push([price, value]);
+      value = 0;
+      price = price + num;
+      value += parseFloat(currentVal[1]);
+    } else {
+      value += parseFloat(currentVal[1]);
+    }
+    return merge;
+  }, [])
+}
+
 
 // Display total asa, xu, order book
 const orderBook = async (amount = 20, num = 1) => {
@@ -96,9 +103,8 @@ const orderBook = async (amount = 20, num = 1) => {
 `;
 
   // Merge orderbook
-  const mergeBuy = buyOrder.reduce(mergeOrderBook, [0]);
-  const mergeSell = sellOrder.reduce(mergeOrderBook, [0]);
-  console.log(mergeBuy, mergeSell);
+  const mergeBuy = mergeOrderBook(buyOrder, -num);
+  const mergeSell = mergeOrderBook(sellOrder, +num);
 
   buyList.innerHTML = "";
   sellList.innerHTML = "";
@@ -106,18 +112,16 @@ const orderBook = async (amount = 20, num = 1) => {
     const divBuy = document.createElement("div");
     const divSell = document.createElement("div");
 
-    if (num > 1) {
-    } else {
-      divBuy.innerHTML = `
-        <div class="buy-order">${separateThousand(buyOrder[i][1])}</div>
-        <div class="buy-order">${separateThousand(buyOrder[i][0])}</div>`;
-      divSell.innerHTML = `
-        <div class="sell-order">${separateThousand(sellOrder[i][0])}</div>
-        <div class="sell-order">${separateThousand(sellOrder[i][1])}</div>
-      `;
-      buyList.appendChild(divBuy);
-      sellList.appendChild(divSell);
-    }
+    divBuy.innerHTML = `
+      <div class="left">${separateThousand(mergeBuy[i][1])}</div>
+      <div class="buy-order">${separateThousand(mergeBuy[i][0])}</div>`;
+    divSell.innerHTML = `
+      <div class="sell-order">${separateThousand(mergeSell[i][0])}</div>
+      <div class="right">${separateThousand(mergeSell[i][1])}</div>
+    `;
+
+    buyList.appendChild(divBuy);
+    sellList.appendChild(divSell);
   }
 };
 
@@ -137,7 +141,8 @@ setInterval(() => {
 const sumList = document.querySelector("#sum-list");
 sumList.addEventListener("input", ({ target }) => {
   sum = target.value;
-  numberList.value = 20;
+  // amount = 20;
+  // numberList.value = 20;
   orderBook(amount, sum);
 });
 
@@ -145,6 +150,6 @@ const numberList = document.querySelector("#number-list");
 numberList.addEventListener("input", ({ target }) => {
   amount = target.value;
   // sum = 1;
-  sumList.value = 1;
+  // sumList.value = 1;
   orderBook(amount, sum);
 });

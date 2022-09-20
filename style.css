@@ -143,10 +143,12 @@ section {
 }
 
 .menu-list {
+  width: 30%;
   font-weight: bold;
 }
 
 .input select {
+  width: 50px;
   padding: 3px 17px 3px 5px;
   appearance: none;
   border: 1px solid #dedede;
@@ -160,6 +162,7 @@ section {
 
 .order-list {
   width: 100%;
+  min-height: 440px;
   display: flex;
 }
 

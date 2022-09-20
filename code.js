@@ -64,8 +64,8 @@ const sumValue = (sum, currentVal) => {
 // Merge orderbook
 const mergeOrderBook = (arr, num)=> {
   let value = 0;
-  let price = arr[0][0] - (arr[0][0] % num);
-  // let price = num <= 0 ? arr[0][0] - (arr[0][0] % num) : arr[0][0] - (arr[0][0] % num) + num;
+  // let price = arr[0][0] - (arr[0][0] % num);
+  let price = num <= 0 ? arr[0][0] - (arr[0][0] % num) : arr[0][0] - (arr[0][0] % num) + num;
   
   return arr.reduce((merge, currentVal) => {
     if ((currentVal[0] - price)*num > 0) {

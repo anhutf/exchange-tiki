@@ -1,6 +1,7 @@
 :root {
   --theme-color: #212529;
-  --font-color: #f1f3f5;
+  --font-color-prime: #f8f9fa;
+  --font-color: #e9ecef;
 	--buy-color: #37b24d;
   --sell-color: #f03e3e;
 }
@@ -14,25 +15,34 @@
 body {
   font-family: 'Roboto', sans-serif;
   background-color: #0b0d0e;
-  color: #f8f9fa;
+  color: var(--font-color-prime);
   line-height: 1;
   font-size: 14px;
   font-weight: 400;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
 }
 
 header, footer {
   width: 100%;
   background-color: #171a1c;
-  padding: 10px;
 }
 
 header h1 {
   font-weight: 500;
   font-size: 20px;
   color: var(--font-color);
+  padding: 20px 10px 15px;
   text-align: center;
+}
+
+footer {
+  line-height: 1.5;
+  font-size: 12px;
+  text-align: right;
+  padding: 15px 10px;
 }
 
 section {
@@ -53,6 +63,7 @@ section {
 
 .summary {
   background-color: var(--theme-color);
+  color: var(--font-color);
   font-size: 12px;
   font-weight: 300;
   width: 100%;
@@ -83,6 +94,7 @@ section {
 }
 
 .summary span {
+  color: var(--font-color-prime);
   font-size: 14px;
   font-weight: 400;
 }
@@ -141,6 +153,7 @@ section {
 
 .menu-select,
 .menu {
+  color: var(--font-color);
   background-color: var(--theme-color);
   width: 100%;
   padding: 10px;
@@ -150,7 +163,7 @@ section {
 }
 
 .menu-select {
-  padding-bottom: 2px;
+  padding: 15px 10px 5px;
 }
 
 .menu-select h3 {
@@ -160,6 +173,7 @@ section {
 }
 
 .menu-list {
+  font-size: 12px;
   width: 30%;
   font-weight: 300;
 }
@@ -169,8 +183,9 @@ section {
 }
 
 .input select {
+  appearance: none;
   background: transparent;
-  color: #dee2e6;
+  color: var(--font-color-prime);
   text-align: center;
   border: none;
   outline: none;
@@ -188,13 +203,13 @@ section {
 
 .buy-list {
   width: 50%;
-  padding-right: 5px;
-  border-right: 1px solid #dee2e6;
+  padding-right: 7px;
+  border-right: 1px solid #343a40;
 }
 
 .sell-list {
   width: 50%;
-  padding-left: 5px;
+  padding-left: 7px;
 }
 
 .buy-list div,

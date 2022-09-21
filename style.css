@@ -163,7 +163,14 @@ section {
 }
 
 .menu-select {
+  position: sticky;
+  top: 0;
   padding: 15px 10px 5px;
+}
+
+.menu {
+  position: sticky;
+  top: 39px;
 }
 
 .menu-select h3 {

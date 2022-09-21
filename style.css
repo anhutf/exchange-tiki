@@ -14,7 +14,7 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: #0b0d0e;
+  background-color: #171a1c;
   color: var(--font-color-prime);
   line-height: 1;
   font-size: 14px;
@@ -26,14 +26,14 @@ body {
 }
 
 header, footer {
+  color: var(--font-color);
   width: 100%;
-  background-color: #171a1c;
+  background-color: #2d3339;
 }
 
 header h1 {
   font-weight: 500;
   font-size: 20px;
-  color: var(--font-color);
   padding: 20px 10px 15px;
   text-align: center;
 }
@@ -183,6 +183,7 @@ section {
 }
 
 .input select {
+  width: 35px;
   appearance: none;
   background: transparent;
   color: var(--font-color-prime);
@@ -190,6 +191,12 @@ section {
   border: none;
   outline: none;
   font-size: 16px;
+  border-bottom: 2px solid #495057;
+
+}
+
+.input option {
+  background-color: #495057;
 }
 
 .order-list {

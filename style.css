@@ -1,5 +1,6 @@
 :root {
   --theme-color: #212529;
+  --font-color: #f1f3f5;
 	--buy-color: #37b24d;
   --sell-color: #f03e3e;
 }
@@ -12,7 +13,7 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: #1a1a1a;
+  background-color: #0b0d0e;
   color: #f8f9fa;
   line-height: 1;
   font-size: 14px;
@@ -21,14 +22,21 @@ body {
   justify-content: center;
 }
 
-h1 {
+header, footer {
+  width: 100%;
+  background-color: #171a1c;
+  padding: 10px;
+}
+
+header h1 {
   font-weight: 500;
   font-size: 20px;
-  margin: 5px 0 10px;
+  color: var(--font-color);
+  text-align: center;
 }
 
 section {
-  margin: 20px 0 10px;
+  /* margin: 20px 0 10px; */
   width: 400px;
   display: flex;
   flex-direction: column;
@@ -49,12 +57,13 @@ section {
   font-weight: 300;
   width: 100%;
   padding: 10px;
+  margin-top: 7px;
   display: grid;
   grid-template-rows: 50px 50px;
   grid-template-columns: 50% auto auto;
   gap: 5px;
   align-items: center;
-  line-height: 1.2;
+  line-height: 1.5;
 }
 
 .current-price {
@@ -69,6 +78,7 @@ section {
 }
 
 .change-percent {
+  font-size: 14px;
   padding: 0 20px;
 }
 
@@ -171,6 +181,7 @@ section {
   background-color: var(--theme-color);
   width: 100%;
   padding: 0 10px 10px;
+  margin-bottom: 7px;
   min-height: 440px;
   display: flex;
 }

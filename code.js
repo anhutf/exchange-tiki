@@ -27,9 +27,9 @@ const summaryMarket = async () => {
 
   // Set color of change percent
   const percent = parseFloat(ticker.price_change_percent);
-  let classColor = "buy-order";
+  let classColor = "buy-total";
   if (percent < 0) {
-    classColor = "sell-order";
+    classColor = "sell-total";
   }
 
   summary.innerHTML = `
@@ -146,10 +146,10 @@ summaryMarket();
 orderBook();
 
 // Reload every 3 seconds
-// setInterval(() => {
-//   summaryMarket();
-//   orderBook(amount, sum);
-// }, 3000);
+setInterval(() => {
+  summaryMarket();
+  orderBook(amount, sum);
+}, 3000);
 
 // Get amount from user
 const sumList = document.querySelector("#sum-list");

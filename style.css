@@ -143,11 +143,11 @@ section {
   font-weight: 500;
 }
 
-.total .buy-total {
+.buy-total {
   color: var(--buy-color);
 }
 
-.total .sell-total {
+.sell-total {
   color: var(--sell-color);
 }
 

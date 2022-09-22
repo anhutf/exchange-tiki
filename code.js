@@ -1,8 +1,8 @@
 const summary = document.querySelector(".summary");
 const buyList = document.querySelector(".buy-list");
 const sellList = document.querySelector(".sell-list");
-const buy = document.querySelector(".buy-order");
-const sell = document.querySelector(".sell-order");
+const buy = document.querySelector(".buy-total");
+const sell = document.querySelector(".sell-total");
 
 // Get exchange.tiki data
 const fetchData = async function (url) {
@@ -106,16 +106,28 @@ const orderBook = async (amount = 20, num = 1) => {
   const mergeBuy = mergeOrderBook(buyOrder, -num);
   const mergeSell = mergeOrderBook(sellOrder, +num);
 
+  // Get total asa on list
+  let totalAsaBuy = 0;
+  let totalAsaSell = 0;
+  for (let i = 0; i < amount; i++) {
+    totalAsaBuy += mergeBuy[i][1];
+    totalAsaSell += mergeSell[i][1];
+  }
+  console.log(totalAsaSell);
+
   buyList.innerHTML = "";
   sellList.innerHTML = "";
   for (let i = 0; i < amount; i++) {
     const divBuy = document.createElement("div");
     const divSell = document.createElement("div");
 
-    divBuy.innerHTML = `
+    divBuy.innerHTML = ` 
       <div class="left">${separateThousand(mergeBuy[i][1])}</div>
-      <div class="buy-order">${separateThousand(mergeBuy[i][0])}</div>`;
+      <div class="buy-order">${separateThousand(mergeBuy[i][0])}</div>
+      <div class="chart-item-buy" style="--percent: ${100*mergeBuy[i][1]/totalAsaBuy}%"></div>
+    `;
     divSell.innerHTML = `
+      <div class="chart-item-sell" style="--percent: ${100*mergeSell[i][1]/totalAsaSell}%"></div>
       <div class="sell-order">${separateThousand(mergeSell[i][0])}</div>
       <div class="right">${separateThousand(mergeSell[i][1])}</div>
     `;
@@ -132,10 +144,10 @@ summaryMarket();
 orderBook();
 
 // Reload every 3 seconds
-setInterval(() => {
-  summaryMarket();
-  orderBook(amount, sum);
-}, 3000);
+// setInterval(() => {
+//   summaryMarket();
+//   orderBook(amount, sum);
+// }, 3000);
 
 // Get amount from user
 const sumList = document.querySelector("#sum-list");

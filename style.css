@@ -34,7 +34,7 @@ header, footer {
 header h1 {
   font-weight: 500;
   font-size: 20px;
-  padding: 20px 10px 15px;
+  padding: 15px 10px;
   text-align: center;
 }
 
@@ -190,20 +190,16 @@ section {
 }
 
 .input select {
-  width: 35px;
-  appearance: none;
+  /* width: 50px; */
   background: transparent;
   color: var(--font-color-prime);
-  text-align: center;
-  border: none;
-  outline: none;
+  /* text-align: center; */
   font-size: 16px;
-  border-bottom: 2px solid #495057;
-
+  padding: 2px;
 }
 
 .input option {
-  background-color: #495057;
+  background-color: var(--theme-color);
 }
 
 .order-list {

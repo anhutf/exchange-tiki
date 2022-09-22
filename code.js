@@ -107,6 +107,9 @@ const orderBook = async (amount = 20, num = 1) => {
   const mergeSell = mergeOrderBook(sellOrder, +num);
 
   // Get total asa on list
+  if (amount > mergeBuy.length || amount > mergeSell.length) {
+    amount = Math.min(mergeBuy.length, mergeSell.length);
+  }
   let totalAsaBuy = 0;
   let totalAsaSell = 0;
   for (let i = 0; i < amount; i++) {
@@ -143,10 +146,10 @@ summaryMarket();
 orderBook();
 
 // Reload every 3 seconds
-setInterval(() => {
-  summaryMarket();
-  orderBook(amount, sum);
-}, 3000);
+// setInterval(() => {
+//   summaryMarket();
+//   orderBook(amount, sum);
+// }, 3000);
 
 // Get amount from user
 const sumList = document.querySelector("#sum-list");

@@ -156,7 +156,6 @@ section {
   color: var(--font-color);
   background-color: var(--theme-color);
   width: 100%;
-  padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -166,12 +165,15 @@ section {
   height: 45px;
   position: sticky;
   top: 0;
+  z-index: 100;
   padding: 15px 10px 5px;
 }
 
 .menu {
+  padding: 10px 15px;
   position: sticky;
   top: 45px;
+  z-index: 100;
 }
 
 .menu-select h3 {
@@ -227,9 +229,9 @@ section {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 4px 0;
+  padding: 5px 0;
   position: relative;
-  height: 22px;
+  height: 24px;
 }
 
 .buy-order {
@@ -268,7 +270,7 @@ section {
 .chart-item-buy, .chart-item-sell {
   color: #fff;
   width: var(--percent);
-  height: 22px;
+  height: 24px;
 }
 
 .chart-item-buy {

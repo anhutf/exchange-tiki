@@ -206,14 +206,20 @@ section {
 .order-list {
   background-color: var(--theme-color);
   width: 100%;
-  padding: 0 10px 10px;
+  padding-bottom: 10px;
   margin-bottom: 7px;
   min-height: 410px;
   display: flex;
 }
 
-.buy-list, .sell-list {
+.buy-list {
   width: 50%;
+  padding-left: 10px;
+}
+
+.sell-list {
+  width: 50%;
+  padding-right: 10px;
 }
 
 .buy-list > div,
@@ -221,9 +227,9 @@ section {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2px 0;
+  padding: 4px 0;
   position: relative;
-  height: 20px;
+  height: 22px;
 }
 
 .buy-order {
@@ -236,6 +242,14 @@ section {
   color: var(--sell-color);
   z-index: 10;
   padding-left: 5px;
+}
+
+.buy-amount {
+  padding-left: 5px;
+}
+
+.sell-amount {
+  padding-right: 5px;
 }
 
 .left {
@@ -254,7 +268,7 @@ section {
 .chart-item-buy, .chart-item-sell {
   color: #fff;
   width: var(--percent);
-  height: 20px;
+  height: 22px;
 }
 
 .chart-item-buy {

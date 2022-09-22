@@ -110,10 +110,9 @@ const orderBook = async (amount = 20, num = 1) => {
   let totalAsaBuy = 0;
   let totalAsaSell = 0;
   for (let i = 0; i < amount; i++) {
-    totalAsaBuy += mergeBuy[i][1];
-    totalAsaSell += mergeSell[i][1];
+    totalAsaBuy = mergeBuy[i][1] > totalAsaBuy ? mergeBuy[i][1] : totalAsaBuy;
+    totalAsaSell = mergeSell[i][1] > totalAsaSell ? mergeSell[i][1] : totalAsaSell;
   }
-  console.log(totalAsaSell);
 
   buyList.innerHTML = "";
   sellList.innerHTML = "";
@@ -122,14 +121,14 @@ const orderBook = async (amount = 20, num = 1) => {
     const divSell = document.createElement("div");
 
     divBuy.innerHTML = ` 
-      <div class="left">${separateThousand(mergeBuy[i][1])}</div>
+      <div class="buy-amount">${separateThousand(mergeBuy[i][1])}</div>
       <div class="buy-order">${separateThousand(mergeBuy[i][0])}</div>
       <div class="chart-item-buy" style="--percent: ${100*mergeBuy[i][1]/totalAsaBuy}%"></div>
     `;
     divSell.innerHTML = `
       <div class="chart-item-sell" style="--percent: ${100*mergeSell[i][1]/totalAsaSell}%"></div>
       <div class="sell-order">${separateThousand(mergeSell[i][0])}</div>
-      <div class="right">${separateThousand(mergeSell[i][1])}</div>
+      <div class="sell-amount">${separateThousand(mergeSell[i][1])}</div>
     `;
 
     buyList.appendChild(divBuy);
@@ -144,10 +143,10 @@ summaryMarket();
 orderBook();
 
 // Reload every 3 seconds
-// setInterval(() => {
-//   summaryMarket();
-//   orderBook(amount, sum);
-// }, 3000);
+setInterval(() => {
+  summaryMarket();
+  orderBook(amount, sum);
+}, 3000);
 
 // Get amount from user
 const sumList = document.querySelector("#sum-list");

@@ -116,6 +116,7 @@ const orderBook = async (amount = 20, num = 1) => {
     totalAsaBuy = mergeBuy[i][1] > totalAsaBuy ? mergeBuy[i][1] : totalAsaBuy;
     totalAsaSell = mergeSell[i][1] > totalAsaSell ? mergeSell[i][1] : totalAsaSell;
   }
+  const totalAsaHigh = totalAsaBuy >= totalAsaSell ? totalAsaBuy : totalAsaSell;
 
   buyList.innerHTML = "";
   sellList.innerHTML = "";
@@ -126,10 +127,10 @@ const orderBook = async (amount = 20, num = 1) => {
     divBuy.innerHTML = ` 
       <div class="buy-amount">${separateThousand(mergeBuy[i][1])}</div>
       <div class="buy-order">${separateThousand(mergeBuy[i][0])}</div>
-      <div class="chart-item-buy" style="--percent: ${100*mergeBuy[i][1]/totalAsaBuy}%"></div>
+      <div class="chart-item-buy" style="--percent: ${100*mergeBuy[i][1]/totalAsaHigh}%"></div>
     `;
     divSell.innerHTML = `
-      <div class="chart-item-sell" style="--percent: ${100*mergeSell[i][1]/totalAsaSell}%"></div>
+      <div class="chart-item-sell" style="--percent: ${100*mergeSell[i][1]/totalAsaHigh}%"></div>
       <div class="sell-order">${separateThousand(mergeSell[i][0])}</div>
       <div class="sell-amount">${separateThousand(mergeSell[i][1])}</div>
     `;

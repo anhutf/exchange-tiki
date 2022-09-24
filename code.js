@@ -62,24 +62,36 @@ const sumValue = (sum, currentVal) => {
 };
 
 // Merge orderbook
-const mergeOrderBook = (arr, num)=> {
+const mergeOrderBook = (arr, num) => {
   let value = 0;
-  // let price = arr[0][0] - (arr[0][0] % num);
-  let price = num <= 0 ? arr[0][0] - (arr[0][0] % num) : arr[0][0] - (arr[0][0] % num) + num;
-  
+  // Kiem tra neu chia het thi lay gia tri goc, khong thi tru di gia tri gop
+  let price = parseFloat(arr[0][0]);
+  if (arr[0][0] % num !== 0) {
+    price =
+      num < 0
+        ? arr[0][0] - (arr[0][0] % num)
+        : arr[0][0] - (arr[0][0] % num) + num;
+  }
+
   return arr.reduce((merge, currentVal) => {
-    if ((currentVal[0] - price)*num > 0) {
+    if ((currentVal[0] - price) * num > 0) {
       merge.push([price, value]);
-      value = 0;
-      price = price + num;
-      value += parseFloat(currentVal[1]);
+      value = parseFloat(currentVal[1]);
+
+      if (currentVal[0] % num == 0) {
+        price = parseFloat(currentVal[0]);
+      } else {
+        price =
+          num < 0
+            ? currentVal[0] - (currentVal[0] % num)
+            : currentVal[0] - (currentVal[0] % num) + num;
+      }
     } else {
       value += parseFloat(currentVal[1]);
     }
     return merge;
-  }, [])
-}
-
+  }, []);
+};
 
 // Display total asa, xu, order book
 const orderBook = async (amount = 20, num = 1) => {
@@ -114,7 +126,8 @@ const orderBook = async (amount = 20, num = 1) => {
   let totalAsaSell = 0;
   for (let i = 0; i < amount; i++) {
     totalAsaBuy = mergeBuy[i][1] > totalAsaBuy ? mergeBuy[i][1] : totalAsaBuy;
-    totalAsaSell = mergeSell[i][1] > totalAsaSell ? mergeSell[i][1] : totalAsaSell;
+    totalAsaSell =
+      mergeSell[i][1] > totalAsaSell ? mergeSell[i][1] : totalAsaSell;
   }
   const totalAsaHigh = totalAsaBuy >= totalAsaSell ? totalAsaBuy : totalAsaSell;
 
@@ -127,10 +140,14 @@ const orderBook = async (amount = 20, num = 1) => {
     divBuy.innerHTML = ` 
       <div class="buy-amount">${separateThousand(mergeBuy[i][1])}</div>
       <div class="buy-order">${separateThousand(mergeBuy[i][0])}</div>
-      <div class="chart-item-buy" style="--percent: ${100*mergeBuy[i][1]/totalAsaHigh}%"></div>
+      <div class="chart-item-buy" style="--percent: ${
+        (100 * mergeBuy[i][1]) / totalAsaHigh
+      }%"></div>
     `;
     divSell.innerHTML = `
-      <div class="chart-item-sell" style="--percent: ${100*mergeSell[i][1]/totalAsaHigh}%"></div>
+      <div class="chart-item-sell" style="--percent: ${
+        (100 * mergeSell[i][1]) / totalAsaHigh
+      }%"></div>
       <div class="sell-order">${separateThousand(mergeSell[i][0])}</div>
       <div class="sell-amount">${separateThousand(mergeSell[i][1])}</div>
     `;

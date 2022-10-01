@@ -214,7 +214,7 @@ section {
   background-color: var(--theme-color);
   width: 100%;
   padding-bottom: 10px;
-  margin-bottom: 7px;
+  margin-bottom: 5px;
   min-height: 410px;
   display: flex;
 }
@@ -291,5 +291,39 @@ section {
   top: 0;
   left: 0;
   z-index: 1;
+}
+
+/* Volume chart */
+.volume-chart {
+  background-color: var(--theme-color);
+  width: 100%;
+  margin-bottom: 7px;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(30, 1fr);
+  grid-template-rows: 200px;
+  gap: 1px;
+}
+
+.chart-column {
+  height: var(--percent);
+  background-color: #087f5b;
+}
+
+.volume-chart > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+.volume-chart .date, .volume-chart .value {
+  height: 30px;
+  writing-mode: vertical-rl;
+  transform: rotate(-180deg);
+  font-size: 10px;
+  text-align: end;
+  color: var(--font-color);
+  margin: 0 auto;
 }
 

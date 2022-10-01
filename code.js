@@ -3,6 +3,7 @@ const buyList = document.querySelector(".buy-list");
 const sellList = document.querySelector(".sell-list");
 const buy = document.querySelector(".buy-total");
 const sell = document.querySelector(".sell-total");
+const chartList = document.querySelector(".volume-chart");
 
 // Get exchange.tiki data
 const fetchData = async function (url) {
@@ -185,3 +186,25 @@ numberList.addEventListener("input", ({ target }) => {
   // sumList.value = 1;
   orderBook(amount, sum);
 });
+
+
+// Volume chart
+const volumeChart = async () => {
+  const data = await fetchData(
+    "https://api.tiki.vn/sandseel/api/v2/public/markets/asaxu/klines?period=10_080"
+  );
+  
+  chartList.innerHTML = ``;
+  for (let dateData of data) {
+    const dataColumn = document.createElement("div");
+    const date = new Date(dateData[0] * 1000)
+    dataColumn.innerHTML =  `
+      <p class="value">${parseInt(dateData[5]/1000)}K</p>
+      <div class="chart-column" style="--percent: ${dateData[5]/1000000}px"></div>
+      <p class="date">${date.getDate()}/${date.getMonth()+1}</p>
+    `;
+    chartList.appendChild(dataColumn);
+  }
+};
+volumeChart();
+

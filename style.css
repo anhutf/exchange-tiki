@@ -2,7 +2,7 @@
   --theme-color: #212529;
   --font-color-prime: #f8f9fa;
   --font-color: #dee2e6;
-	--buy-color: #37b24d;
+  --buy-color: #37b24d;
   --sell-color: #f03e3e;
 }
 
@@ -13,22 +13,26 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   background-color: #171a1c;
   color: var(--font-color-prime);
   line-height: 1;
   font-size: 14px;
   font-weight: 400;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* justify-content: center; */
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: repeat(3, auto);
+  grid-template-areas: "header header" "market chart" "footer footer";
+  gap: 7px;
+  align-items: flex-start;
 }
 
-header, footer {
+header {
+  grid-area: header;
   color: var(--font-color);
   width: 100%;
   background-color: #2d3339;
+  /* margin-bottom: 7px; */
 }
 
 header h1 {
@@ -36,26 +40,56 @@ header h1 {
   font-size: 20px;
   padding: 15px 10px;
   text-align: center;
-}
-
-footer {
-  line-height: 1.5;
-  font-size: 12px;
-  text-align: right;
-  padding: 15px 10px;
+  text-transform: uppercase;
 }
 
 section {
   /* margin: 20px 0 10px; */
-  width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-@media only screen and (max-width: 500px) {
-  section {
+section.market-data {
+  width: 400px;
+  grid-area: market;
+  justify-self: right;
+}
+
+section.chart-data {
+  width: 500px;
+  grid-area: chart;
+  justify-self: left;
+}
+
+footer {
+  grid-area: footer;
+  color: var(--font-color);
+  width: 100%;
+  background-color: #2d3339;
+  line-height: 1.5;
+  font-size: 12px;
+  text-align: right;
+  padding: 15px 10px;
+  /* margin-top: 7px; */
+}
+
+@media only screen and (max-width: 950px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  section.chart-data {
+    width: 400px;
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  section.market-data,
+  section.chart-data {
     width: 100%;
     min-width: 300px;
   }
@@ -68,7 +102,6 @@ section {
   font-weight: 300;
   width: 100%;
   padding: 10px;
-  margin-top: 7px;
   display: grid;
   grid-template-rows: 50px 50px;
   grid-template-columns: 50% auto auto;
@@ -200,7 +233,7 @@ section {
   color: var(--font-color);
   font-size: 16px;
   background: transparent;
-  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23dee2e6%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23dee2e6%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
   background-position: right 5px top 50%, 0, 0;
   background-size: 12px auto, 100%;
   background-repeat: no-repeat;
@@ -214,7 +247,6 @@ section {
   background-color: var(--theme-color);
   width: 100%;
   padding-bottom: 10px;
-  margin-bottom: 5px;
   min-height: 410px;
   display: flex;
 }
@@ -272,7 +304,8 @@ section {
 }
 
 /* Chart layout */
-.chart-item-buy, .chart-item-sell {
+.chart-item-buy,
+.chart-item-sell {
   width: var(--percent);
   height: 24px;
 }
@@ -294,10 +327,19 @@ section {
 }
 
 /* Volume chart */
+.chart-data h1 {
+  background-color: var(--theme-color);
+  width: 100%;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 15px 10px 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .volume-chart {
   background-color: var(--theme-color);
   width: 100%;
-  margin-bottom: 7px;
   padding: 10px;
   display: grid;
   grid-template-columns: repeat(30, 1fr);
@@ -317,13 +359,14 @@ section {
   gap: 5px;
 }
 
-.volume-chart .date, .volume-chart .value {
+.volume-chart .date,
+.volume-chart .value {
   height: 30px;
   writing-mode: vertical-rl;
   transform: rotate(-180deg);
   font-size: 10px;
+  font-weight: 300;
   text-align: end;
   color: var(--font-color);
   margin: 0 auto;
 }
-

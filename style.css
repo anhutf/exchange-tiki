@@ -343,8 +343,12 @@ footer {
   padding: 10px;
   display: grid;
   grid-template-columns: repeat(30, 1fr);
-  grid-template-rows: 200px;
+  grid-template-rows: auto;
   gap: 1px;
+}
+
+.week {
+  margin-bottom: 5px;
 }
 
 .chart-column {
@@ -361,12 +365,20 @@ footer {
 
 .volume-chart .date,
 .volume-chart .value {
-  height: 30px;
   writing-mode: vertical-rl;
   transform: rotate(-180deg);
   font-size: 10px;
   font-weight: 300;
-  text-align: end;
   color: var(--font-color);
   margin: 0 auto;
+}
+
+.volume-chart .date {
+  height: 25px;
+  text-align: end;
+}
+
+.volume-chart .value {
+  height: 35px;
+  text-align: start;
 }

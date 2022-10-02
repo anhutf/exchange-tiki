@@ -3,7 +3,6 @@ const buyList = document.querySelector(".buy-list");
 const sellList = document.querySelector(".sell-list");
 const buy = document.querySelector(".buy-total");
 const sell = document.querySelector(".sell-total");
-const chartList = document.querySelector(".volume-chart");
 
 // Get exchange.tiki data
 const fetchData = async function (url) {
@@ -188,23 +187,32 @@ numberList.addEventListener("input", ({ target }) => {
 });
 
 // Volume chart
-const volumeChart = async () => {
-  const data = await fetchData(
-    "https://api.tiki.vn/sandseel/api/v2/public/markets/asaxu/klines?period=10_080"
-  );
+const volumeChart = async (url, element) => {
+  const data = await fetchData(url);
 
-  chartList.innerHTML = ``;
+  const amountMax = data.reduce((max, currentVal) => {
+    return Math.max(max, currentVal[5]);
+  }, 0);
+
+  element.innerHTML = ``;
   for (let dateData of data) {
     const dataColumn = document.createElement("div");
     const date = new Date(dateData[0] * 1000);
     dataColumn.innerHTML = `
       <p class="value">${(dateData[5] / 1000000).toFixed(1)}M</p>
       <div class="chart-column" style="--percent: ${
-        dateData[5] / 1000000
+        (dateData[5] * 100) / amountMax
       }px"></div>
       <p class="date">${date.getDate()}/${date.getMonth() + 1}</p>
     `;
-    chartList.appendChild(dataColumn);
+    element.appendChild(dataColumn);
   }
 };
-volumeChart();
+volumeChart(
+  "https://api.tiki.vn/sandseel/api/v2/public/markets/asaxu/klines?period=10_080",
+  document.querySelector(".week")
+);
+volumeChart(
+  "https://api.tiki.vn/sandseel/api/v2/public/markets/asaxu/klines?period=1440",
+  document.querySelector(".day")
+);

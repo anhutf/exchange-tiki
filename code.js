@@ -164,10 +164,10 @@ summaryMarket();
 orderBook();
 
 // Reload every 3 seconds
-setInterval(() => {
-  summaryMarket();
-  orderBook(amount, sum);
-}, 3000);
+// setInterval(() => {
+//   summaryMarket();
+//   orderBook(amount, sum);
+// }, 3000);
 
 // Get amount from user
 const sumList = document.querySelector("#sum-list");

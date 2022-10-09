@@ -3,6 +3,9 @@ const buyList = document.querySelector(".buy-list");
 const sellList = document.querySelector(".sell-list");
 const buy = document.querySelector(".buy-total");
 const sell = document.querySelector(".sell-total");
+const swapXu = document.getElementById("swap-xu");
+const swapAsa = document.getElementById("swap-asa");
+const inputXu = document.getElementById("input-xu");
 
 // Get exchange.tiki data
 const fetchData = async function (url) {
@@ -61,6 +64,21 @@ const sumValue = (sum, currentVal) => {
   return sum;
 };
 
+// Tinh luong mua ban
+const swap = (inputVal, outputEl, arrayOrder) => {
+  let total = 0;
+  for (let i = 0; i < arrayOrder.length; i++) {
+    total +=
+      inputXu.checked === true
+        ? arrayOrder[i][1] * arrayOrder[i][0]
+        : parseFloat(arrayOrder[i][1]);
+    if (total >= inputVal || i === arrayOrder.length - 1) {
+      outputEl.value = parseFloat(arrayOrder[i][0]);
+      break;
+    }
+  }
+};
+
 // Merge orderbook
 const mergeOrderBook = (arr, num) => {
   let value = 0;
@@ -113,6 +131,16 @@ const orderBook = async (amount = 20, num = 1) => {
   <div class="total-asa">${separateThousand(sumSell[0])}A</div>
   <div class="total-xu">${separateThousand(sumSell[1])}đ</div>
 `;
+
+  // Tinh luong mua ban
+  swapXu.addEventListener("input", ({ target }) => {
+    const inputVal = target.value;
+    if (inputXu.checked === true) {
+      swap(inputVal, swapAsa, sellOrder);
+    } else {
+      swap(inputVal, swapAsa, buyOrder);
+    }
+  });
 
   // Merge orderbook
   const mergeBuy = mergeOrderBook(buyOrder, -num);

@@ -141,6 +141,15 @@ const orderBook = async (amount = 20, num = 1) => {
       swap(inputVal, swapAsa, buyOrder);
     }
   });
+  inputXu.addEventListener("change", ({ target }) => {
+    const checkVal = target.checked;
+    const inputVal = swapXu.value;
+    if (checkVal === true) {
+      swap(inputVal, swapAsa, sellOrder);
+    } else {
+      swap(inputVal, swapAsa, buyOrder);
+    }
+  });
 
   // Merge orderbook
   const mergeBuy = mergeOrderBook(buyOrder, -num);

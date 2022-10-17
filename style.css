@@ -188,7 +188,7 @@ footer {
 }
 
 .swap {
-  /* display: none; */
+  align-items: flex-end;
 }
 
 .swap-container {
@@ -220,7 +220,7 @@ footer {
 
 .swap .icon {
   position: relative;
-  bottom: -10px;
+  bottom: -3px;
 }
 
 .menu-select,

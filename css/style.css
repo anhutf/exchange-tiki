@@ -40,6 +40,7 @@ aside {
 
 .section-summary {
   min-height: 24.8rem;
+  margin-bottom: 0.6rem;
 }
 
 .summary-data {
@@ -79,7 +80,6 @@ aside {
 }
 
 .summary-total {
-  margin-bottom: 0.6rem;
   display: flex;
   gap: 1.2rem;
 }

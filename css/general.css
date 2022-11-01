@@ -1,0 +1,72 @@
+/* 
+
+- Font sizes (px):
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+
+- Spacing system (px)
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+
+*/
+
+:root {
+  --theme-color: #212529;
+  --font-color-prime: #f8f9fa;
+  --font-color: #dee2e6;
+  --buy-color: #37b24d;
+  --sell-color: #f03e3e;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /* font-size: 10px; */
+  /* 10px / 16px = 0.625 */
+  /* Percentage of user's browser font-size setting */
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  line-height: 1;
+  font-weight: 400;
+  background-color: #171a1c;
+  color: var(--font-color-prime);
+  font-size: 1.6rem;
+
+  display: grid;
+  grid-template-columns: auto auto;
+  /* grid-template-rows: repeat(3, auto); */
+  grid-template-areas: "header header" "market chart" "footer footer";
+  gap: 0.9rem;
+  align-items: flex-start;
+}
+
+.container {
+  padding: 2.4rem 1.2rem;
+  background-color: var(--theme-color);
+}
+
+.icon {
+  width: 3.6rem;
+  height: 3.6rem;
+}
+
+.sell-icon {
+  stroke: var(--sell-color);
+}
+
+.buy-icon {
+  stroke: var(--buy-color);
+}
+
+.buy-color {
+  color: var(--buy-color);
+}
+
+.sell-color {
+  color: var(--sell-color);
+}

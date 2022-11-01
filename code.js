@@ -1,8 +1,10 @@
-const summary = document.querySelector(".summary");
-const buyList = document.querySelector(".buy-list");
-const sellList = document.querySelector(".sell-list");
+const summary = document.querySelector(".summary-data");
 const buy = document.querySelector(".buy-total");
 const sell = document.querySelector(".sell-total");
+
+const buyList = document.querySelector(".buy-list");
+const sellList = document.querySelector(".sell-list");
+
 const swapXu = document.getElementById("swap-xu");
 const swapAsa = document.getElementById("swap-asa");
 const inputXu = document.getElementById("input-xu");
@@ -30,9 +32,9 @@ const summaryMarket = async () => {
 
   // Set color of change percent
   const percent = parseFloat(ticker.price_change_percent);
-  let classColor = "buy-total";
+  let classColor = "buy-color";
   if (percent < 0) {
-    classColor = "sell-total";
+    classColor = "sell-color";
   }
 
   summary.innerHTML = `
@@ -124,11 +126,11 @@ const orderBook = async (amount = 20, num = 1) => {
   const sumSell = sellOrder.reduce(sumValue, [0, 0]);
 
   buy.innerHTML = `
-    <div class="total-asa">${separateThousand(sumBuy[0])}A</div>
+    <div class="total-asa buy-color">${separateThousand(sumBuy[0])}A</div>
     <div class="total-xu">${separateThousand(sumBuy[1])}đ</div>
   `;
   sell.innerHTML = `
-  <div class="total-asa">${separateThousand(sumSell[0])}A</div>
+  <div class="total-asa sell-color">${separateThousand(sumSell[0])}A</div>
   <div class="total-xu">${separateThousand(sumSell[1])}đ</div>
 `;
 
@@ -238,8 +240,8 @@ const volumeChart = async (url, element) => {
     dataColumn.innerHTML = `
       <p class="value">${(dateData[5] / 1000000).toFixed(1)}M</p>
       <div class="chart-column" style="--percent: ${
-        (dateData[5] * 100) / amountMax
-      }px"></div>
+        (dateData[5] * 10) / amountMax
+      }rem"></div>
       <p class="date">${date.getDate()}/${date.getMonth() + 1}</p>
     `;
     element.appendChild(dataColumn);

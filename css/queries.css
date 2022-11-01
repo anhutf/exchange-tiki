@@ -1,0 +1,48 @@
+/* Responsive */
+
+@media (max-width: 64em) {
+  body {
+    grid-template-columns: 1fr;
+    grid-template-areas: "header" "market" "chart" "footer";
+  }
+
+  main {
+    width: 50rem;
+    justify-self: center;
+    margin-left: 0;
+  }
+
+  aside {
+    width: 50rem;
+    justify-self: center;
+    margin-right: 0;
+  }
+
+  .volume-chart .date,
+  .volume-chart .value {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 33em) {
+  html {
+    /* 9px / 16px = 0.5625 */
+    font-size: 56.25%;
+  }
+
+  main {
+    width: 100%;
+    max-width: inherit;
+  }
+
+  aside {
+    width: 100%;
+  }
+}
+
+@media (max-width: 26em) {
+  .volume-chart .date,
+  .volume-chart .value {
+    font-size: 1rem;
+  }
+}

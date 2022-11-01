@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <meta name="title" content="Dữ liệu giao dịch ASA/XU" />
     <meta
       name="description"
@@ -36,59 +37,69 @@
       rel="apple-touch-icon"
       href="https://salt.tikicdn.com/ts/upload/b4/6d/c6/2f88c561c13eea0a1bac396531ded106.png"
     />
-    <title>Dữ liệu giao dịch ASA/XU</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
       rel="stylesheet"
     />
+
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/queries.css" />
+
     <script src=" https://unpkg.com/axios@1.0.0/dist/axios.min.js"></script>
-    <link rel="stylesheet" href="style.css" />
+
+    <title>Dữ liệu giao dịch ASA/XU</title>
   </head>
   <body>
-    <header>
+    <header class="header">
       <h1>Dữ liệu giao dịch ASA/XU</h1>
     </header>
-    <section class="market-data">
-      <div class="summary"></div>
-      <div class="total">
-        <div class="order">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="icon buy-icon"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          <div class="buy-total"></div>
+    <main>
+      <section class="section-summary">
+        <div class="summary-data container"></div>
+
+        <div class="summary-total container">
+          <div class="total">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="icon buy-icon"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <div class="buy-total"></div>
+          </div>
+          <div class="total">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="icon sell-icon"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <div class="sell-total"></div>
+          </div>
         </div>
-        <div class="order">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="icon sell-icon"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          <div class="sell-total"></div>
-        </div>
-      </div>
-      <div class="swap">
+      </section>
+
+      <section class="section-swap container">
         <div class="swap-container">
           <div class="swap-title">
             <span>Mua/bán:</span>
@@ -101,7 +112,7 @@
             />
             <label for="input-xu">XU</label>
             <!-- <input type="checkbox" id="input-asa" name="coin" value="asa" />
-            <label for="input-asa">ASA</label> -->
+              <label for="input-asa">ASA</label> -->
           </div>
           <input type="text" placeholder="1000000" id="swap-xu" />
         </div>
@@ -123,45 +134,54 @@
           <p class="swap-title">Giá ASA sau mua/bán</p>
           <input type="text" placeholder="100" id="swap-asa" />
         </div>
-      </div>
-      <div class="menu-select">
-        <h3>SỔ LỆNH</h3>
-        <div class="input">
-          <label for="sum-list">Gộp lệnh</label>
-          <select id="sum-list" name="sum-list">
-            <option value="1" selected>1</option>
-            <option value="5">5</option>
-            <option value="10">10</option>
-          </select>
-          <label for="number-list">Mở rộng</label>
-          <select id="number-list" name="number-list">
-            <option value="20" selected>20</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-          </select>
-        </div>
-      </div>
-      <div class="menu">
-        <div class="menu-list left">Mua vào</div>
-        <div class="menu-list center">Giá (Xu)</div>
-        <div class="menu-list right">Bán ra</div>
-      </div>
+      </section>
 
-      <div class="order-list">
-        <div class="buy-list"></div>
-        <div class="sell-list"></div>
-      </div>
-    </section>
-    <section class="chart-data">
-      <h1>Khối lượng giao dịch tuần</h1>
-      <div class="volume-chart week"></div>
-      <h1>Khối lượng giao dịch ngày</h1>
-      <div class="volume-chart day"></div>
-    </section>
-    <footer>
+      <section class="section-order">
+        <div class="menu">
+          <div class="menu-select">
+            <h3>Sổ lệnh</h3>
+            <div class="input">
+              <label for="sum-list">Gộp lệnh</label>
+              <select id="sum-list" name="sum-list">
+                <option value="1" selected>1</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+              </select>
+              <label for="number-list">Mở rộng</label>
+              <select id="number-list" name="number-list">
+                <option value="20" selected>20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+            </div>
+          </div>
+          <div class="menu-order">
+            <div class="menu-list left">Mua vào</div>
+            <div class="menu-list center">Giá (Xu)</div>
+            <div class="menu-list right">Bán ra</div>
+          </div>
+        </div>
+
+        <div class="order-list">
+          <div class="buy-list"></div>
+          <div class="sell-list"></div>
+        </div>
+      </section>
+    </main>
+    <aside>
+      <section class="section-chart">
+        <h2>Khối lượng giao dịch tuần</h2>
+        <div class="volume-chart week"></div>
+        <h2>Khối lượng giao dịch ngày</h2>
+        <div class="volume-chart day"></div>
+      </section>
+    </aside>
+
+    <footer class="footer">
       <p>@anhutf</p>
       <p>Nguồn dữ liệu: exchange.tiki.vn</p>
     </footer>
+
     <script src="code.js"></script>
   </body>
 </html>

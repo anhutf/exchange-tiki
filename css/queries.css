@@ -39,10 +39,3 @@
     width: 100%;
   }
 }
-
-@media (max-width: 26em) {
-  .volume-chart .date,
-  .volume-chart .value {
-    font-size: 1rem;
-  }
-}

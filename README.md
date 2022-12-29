@@ -6,3 +6,4 @@ Fetch data từ exchange.tiki.vn để phân tích dữ liệu (sử dụng Axio
 1. Xem thông tin mua. bán, khối lượng giao dịch, giá trong 24h,...
 2. Mở rộng, gộp lệnh đặt mua, bán.
 3. Biểu đồ khối lượng giao dịch.
+4. Swap.

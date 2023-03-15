@@ -93,13 +93,17 @@ const mergeOrderBook = (arr, num) => {
         : arr[0][0] - (arr[0][0] % num) + num;
   }
 
-  return arr.reduce((merge, currentVal) => {
+  return arr.reduce((merge, currentVal, currentIndex, array) => {
     if ((currentVal[0] - price) * num > 0) {
       merge.push([price, value]);
       value = parseFloat(currentVal[1]);
 
       if (currentVal[0] % num == 0) {
         price = parseFloat(currentVal[0]);
+        // Kiem tra neu la gia tri cuoi cung thi push vo merge luon
+        if (currentIndex == array.length - 1) {
+          merge.push([parseFloat(currentVal[0]), value]);
+        }
       } else {
         price =
           num < 0
@@ -108,6 +112,10 @@ const mergeOrderBook = (arr, num) => {
       }
     } else {
       value += parseFloat(currentVal[1]);
+      // Kiem tra neu la gia tri cuoi cung thi push vo merge luon
+      if (currentIndex == array.length - 1) {
+        merge.push([parseFloat(currentVal[0]), value]);
+      }
     }
     return merge;
   }, []);

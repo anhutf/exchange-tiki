@@ -7,7 +7,8 @@ const sellList = document.querySelector(".sell-list");
 
 const swapXu = document.getElementById("swap-xu");
 const swapAsa = document.getElementById("swap-asa");
-const inputXu = document.getElementById("input-xu");
+const outputAsa = document.getElementById("output-asa");
+const outputXu = document.getElementById("output-xu");
 
 // Get exchange.tiki data
 const fetchData = async function (url) {
@@ -67,15 +68,80 @@ const sumValue = (sum, currentVal) => {
 };
 
 // Tinh luong mua ban
-const swap = (inputVal, outputEl, arrayOrder) => {
+const swapXuFunc = (inputVal, outputEl, arrayOrder) => {
   let total = 0;
+  let sum = 0;
+
   for (let i = 0; i < arrayOrder.length; i++) {
-    total +=
-      inputXu.checked === true
-        ? arrayOrder[i][1] * arrayOrder[i][0]
-        : parseFloat(arrayOrder[i][1]);
+    total += arrayOrder[i][1] * arrayOrder[i][0];
+    sum += parseFloat(arrayOrder[i][1]);
+
     if (total >= inputVal || i === arrayOrder.length - 1) {
-      outputEl.value = parseFloat(arrayOrder[i][0]);
+      sum =
+        total >= inputVal
+          ? sum -
+            parseFloat(arrayOrder[i][1]) +
+            (inputVal - total + arrayOrder[i][1] * arrayOrder[i][0]) /
+              arrayOrder[i][0]
+          : sum;
+
+      outputEl.innerHTML = `
+      <div class="item-swap">
+        <div class="item-name">Số lượng</div>
+        <div class="item-value">${separateThousand(sum.toFixed(2))} ASA</div>
+      </div>
+      <div class="item-swap">
+        <div class="item-name">Giá ASA sau mua</div>
+        <div class="item-value">${separateThousand(
+          parseFloat(arrayOrder[i][0])
+        )} XU</div>
+      </div>
+      <div class="item-swap">
+        <div class="item-name">Số dư</div>
+        <div class="item-value">${
+          inputVal > total ? separateThousand(inputVal - total) : 0
+        } XU</div>
+      </div>
+      `;
+      break;
+    }
+  }
+};
+
+const swapAsaFunc = (inputVal, outputEl, arrayOrder) => {
+  let total = 0;
+  let sum = 0;
+
+  for (let i = 0; i < arrayOrder.length; i++) {
+    total += parseFloat(arrayOrder[i][1]);
+    sum += arrayOrder[i][1] * arrayOrder[i][0];
+
+    if (total >= inputVal || i === arrayOrder.length - 1) {
+      sum =
+        total >= inputVal
+          ? sum -
+            arrayOrder[i][1] * arrayOrder[i][0] +
+            (inputVal - total + parseFloat(arrayOrder[i][1])) * arrayOrder[i][0]
+          : sum;
+
+      outputEl.innerHTML = `
+      <div class="item-swap">
+        <div class="item-name">Số lượng</div>
+        <div class="item-value">${separateThousand(sum.toFixed(2))} XU</div>
+      </div>
+      <div class="item-swap">
+        <div class="item-name">Giá ASA sau mua</div>
+        <div class="item-value">${separateThousand(
+          parseFloat(arrayOrder[i][0])
+        )} XU</div>
+      </div>
+      <div class="item-swap">
+        <div class="item-name">Số dư</div>
+        <div class="item-value">${
+          inputVal > total ? separateThousand(inputVal - total) : 0
+        } ASA</div>
+      </div>
+      `;
       break;
     }
   }
@@ -143,22 +209,16 @@ const orderBook = async (amount = 20, num = 1) => {
 `;
 
   // Tinh luong mua ban
+  swapXuFunc(10000000, outputAsa, sellOrder);
+  swapAsaFunc(1000, outputXu, buyOrder);
+
   swapXu.addEventListener("input", ({ target }) => {
     const inputVal = target.value;
-    if (inputXu.checked === true) {
-      swap(inputVal, swapAsa, sellOrder);
-    } else {
-      swap(inputVal, swapAsa, buyOrder);
-    }
+    swapXuFunc(inputVal, outputAsa, sellOrder);
   });
-  inputXu.addEventListener("change", ({ target }) => {
-    const checkVal = target.checked;
-    const inputVal = swapXu.value;
-    if (checkVal === true) {
-      swap(inputVal, swapAsa, sellOrder);
-    } else {
-      swap(inputVal, swapAsa, buyOrder);
-    }
+  swapAsa.addEventListener("input", ({ target }) => {
+    const inputVal = target.value;
+    swapAsaFunc(inputVal, outputXu, buyOrder);
   });
 
   // Merge orderbook
@@ -211,10 +271,10 @@ summaryMarket();
 orderBook();
 
 // Reload every 3 seconds
-setInterval(() => {
-  summaryMarket();
-  orderBook(amount, sum);
-}, 3000);
+// setInterval(() => {
+//   summaryMarket();
+//   orderBook(amount, sum);
+// }, 3000);
 
 // Get amount from user
 const sumList = document.querySelector("#sum-list");

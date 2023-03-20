@@ -45,6 +45,42 @@ body {
   align-items: flex-start;
 }
 
+header {
+  color: var(--font-color);
+  background-color: #2d3339;
+
+  grid-area: header;
+}
+
+footer {
+  color: var(--font-color);
+  background-color: #2d3339;
+  line-height: 1.5;
+  font-size: 1.4rem;
+  text-align: right;
+  padding: 2.4rem 1.2rem;
+
+  grid-area: footer;
+}
+
+main {
+  width: 45rem;
+  grid-area: market;
+  justify-self: right;
+  margin-left: 0.9rem;
+
+  grid-area: market;
+}
+
+aside {
+  max-width: 55rem;
+  grid-area: chart;
+  justify-self: left;
+  margin-right: 0.9rem;
+
+  grid-area: chart;
+}
+
 .container {
   padding: 2.4rem 1.2rem;
   background-color: var(--theme-color);

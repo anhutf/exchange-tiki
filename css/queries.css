@@ -1,6 +1,6 @@
 /* Responsive */
 
-@media (max-width: 64em) {
+@media (max-width: 60em) {
   body {
     grid-template-columns: 1fr;
     grid-template-areas: "header" "market" "chart" "footer";
@@ -32,7 +32,6 @@
 
   main {
     width: 100%;
-    max-width: inherit;
   }
 
   aside {

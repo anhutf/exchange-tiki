@@ -99,43 +99,6 @@
         </div>
       </section>
 
-      <section class="section-swap container">
-        <div class="swap-container">
-          <div class="swap-title">
-            <span>Mua/bán:</span>
-            <input
-              type="checkbox"
-              checked
-              id="input-xu"
-              name="coin"
-              value="xu"
-            />
-            <label for="input-xu">XU</label>
-            <!-- <input type="checkbox" id="input-asa" name="coin" value="asa" />
-              <label for="input-asa">ASA</label> -->
-          </div>
-          <input type="text" placeholder="1000000" id="swap-xu" />
-        </div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="icon"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3"
-          />
-        </svg>
-        <div class="swap-container">
-          <p class="swap-title">Giá ASA sau mua/bán</p>
-          <input type="text" placeholder="100" id="swap-asa" />
-        </div>
-      </section>
-
       <section class="section-order">
         <div class="menu">
           <div class="menu-select">
@@ -169,6 +132,28 @@
       </section>
     </main>
     <aside>
+      <section class="section-swap container">
+        <div class="swap-buy">
+          <div class="swap-input">
+            <p class="swap-title">Dùng XU mua ASA</p>
+            <input type="number" placeholder="10000000" id="swap-xu" />
+          </div>
+          <div class="swap-output" id="output-asa">
+            <!-- Swap Xu -->
+          </div>
+        </div>
+
+        <div class="swap-sell">
+          <div class="swap-input">
+            <p class="swap-title">Bán ASA ra XU</p>
+            <input type="number" placeholder="1000" id="swap-asa" />
+          </div>
+          <div class="swap-output" id="output-xu">
+            <!-- Swap Asa -->
+          </div>
+        </div>
+      </section>
+
       <section class="section-chart">
         <h2>Khối lượng giao dịch tuần</h2>
         <div class="volume-chart week"></div>
